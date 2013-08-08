@@ -23,6 +23,7 @@
 		4A40585017B41877006B0D8A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A40584B17B41877006B0D8A /* QuartzCore.framework */; };
 		4A40585117B41877006B0D8A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A40584C17B41877006B0D8A /* Security.framework */; };
 		4A40585217B41877006B0D8A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A40584D17B41877006B0D8A /* SystemConfiguration.framework */; };
+		4A40585417B419A8006B0D8A /* Dropbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A40585317B419A8006B0D8A /* Dropbox.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,7 @@
 		4A40584B17B41877006B0D8A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		4A40584C17B41877006B0D8A /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		4A40584D17B41877006B0D8A /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		4A40585317B419A8006B0D8A /* Dropbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Dropbox.framework; path = SimpleDatastoreList/Dropbox.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 				4A40582717B41378006B0D8A /* UIKit.framework in Frameworks */,
 				4A40582917B41378006B0D8A /* Foundation.framework in Frameworks */,
 				4A40582B17B41378006B0D8A /* CoreGraphics.framework in Frameworks */,
+				4A40585417B419A8006B0D8A /* Dropbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,6 +91,7 @@
 		4A40582517B41378006B0D8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4A40585317B419A8006B0D8A /* Dropbox.framework */,
 				4A40584917B41877006B0D8A /* CFNetwork.framework */,
 				4A40582A17B41378006B0D8A /* CoreGraphics.framework */,
 				4A40582817B41378006B0D8A /* Foundation.framework */,
@@ -280,6 +284,10 @@
 		4A40584717B41378006B0D8A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/SimpleDatastoreList\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SimpleDatastoreList/SimpleDatastoreList-Prefix.pch";
 				INFOPLIST_FILE = "SimpleDatastoreList/SimpleDatastoreList-Info.plist";
@@ -291,6 +299,10 @@
 		4A40584817B41378006B0D8A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/SimpleDatastoreList\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SimpleDatastoreList/SimpleDatastoreList-Prefix.pch";
 				INFOPLIST_FILE = "SimpleDatastoreList/SimpleDatastoreList-Info.plist";
@@ -318,6 +330,7 @@
 				4A40584817B41378006B0D8A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
