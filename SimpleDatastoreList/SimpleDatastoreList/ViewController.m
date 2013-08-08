@@ -10,6 +10,7 @@
 
 @interface ViewController ()
 
+@property (nonatomic) DBDatastore *store;
 @end
 
 @implementation ViewController
@@ -19,12 +20,25 @@
     [super viewDidLoad];
 
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell"];
+    
+    // Watch for accounts being linked/unlinked:
+    __weak ViewController *weakSelf = self;
+    [[DBAccountManager sharedManager] addObserver:self block:^(DBAccount *account) {
+        weakSelf.linkButtonItem.title = account.isLinked ? @"Unlink" : @"Link";
+        
+        if (account.isLinked) {
+            self.store = [DBDatastore openDefaultStoreForAccount:account error:nil];
+        } else {
+            self.store = nil;
+        }
+        
+        [weakSelf reload];
+    }];
 }
 
-- (void)didReceiveMemoryWarning
+- (void)reload
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    [self.tableView reloadData];
 }
 
 #pragma mark - UITableView stuff
@@ -69,7 +83,9 @@
 
 - (IBAction)didTapLinkButton:(id)sender
 {
-    
+    if ([DBAccountManager sharedManager].linkedAccount == nil) {
+        [[DBAccountManager sharedManager] linkFromController:self];
+    }
 }
 
 @end
