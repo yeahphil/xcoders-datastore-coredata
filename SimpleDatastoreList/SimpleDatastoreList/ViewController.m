@@ -11,6 +11,8 @@
 @interface ViewController ()
 
 @property (nonatomic) DBDatastore *store;
+@property (nonatomic) NSArray *tasks;
+
 @end
 
 @implementation ViewController
@@ -32,6 +34,7 @@
 
 - (void)reload
 {
+    self.tasks = nil;
     [self.tableView reloadData];
 }
 
@@ -44,12 +47,33 @@
     if (account != nil) {
         self.store = [DBDatastore openDefaultStoreForAccount:account error:nil];
         
+        __weak ViewController *weakSelf = self;
+        [self.store addObserver:self block:^{
+            if (weakSelf.store.status & (DBDatastoreOutgoing | DBDatastoreIncoming)) {
+                NSDictionary *changes = [weakSelf.store sync:nil];
+                
+                NSLog(@"Changes: %@", changes);
+                
+                [weakSelf reload];
+            }
+        }];
     } else {
         self.store = nil;
     }
     
     [self reload];
 }
+
+- (NSArray *)tasks
+{
+    if (_tasks == nil && self.store != nil) {
+        DBTable *table = [self.store getTable:@"tasks"];
+        _tasks = [table query:nil error:nil];
+    }
+    
+    return _tasks;
+}
+
 #pragma mark - UITableView stuff
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -59,7 +83,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 0;
+    return self.tasks.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -67,12 +91,18 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
+    DBRecord *task = self.tasks[indexPath.row];
+    
+    cell.textLabel.text = [task objectForKey:@"name"];
+    
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    DBRecord *task = self.tasks[indexPath.row];
+    [task deleteRecord];
+    [self reload];
 }
 
 
@@ -81,7 +111,11 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
+    DBTable *table = [self.store getTable:@"tasks"];
+    [table insert:@{ @"name": textField.text, @"created": [NSDate date] }];
     
+    textField.text = nil;
+    [self reload];
     
     return NO;
 }
