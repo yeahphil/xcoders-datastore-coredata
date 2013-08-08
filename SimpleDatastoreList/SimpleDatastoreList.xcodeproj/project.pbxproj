@@ -18,6 +18,11 @@
 		4A40583D17B41378006B0D8A /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4A40583C17B41378006B0D8A /* Default-568h@2x.png */; };
 		4A40584017B41378006B0D8A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A40583F17B41378006B0D8A /* ViewController.m */; };
 		4A40584317B41378006B0D8A /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A40584117B41378006B0D8A /* ViewController.xib */; };
+		4A40584E17B41877006B0D8A /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A40584917B41877006B0D8A /* CFNetwork.framework */; };
+		4A40584F17B41877006B0D8A /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A40584A17B41877006B0D8A /* libc++.dylib */; };
+		4A40585017B41877006B0D8A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A40584B17B41877006B0D8A /* QuartzCore.framework */; };
+		4A40585117B41877006B0D8A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A40584C17B41877006B0D8A /* Security.framework */; };
+		4A40585217B41877006B0D8A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A40584D17B41877006B0D8A /* SystemConfiguration.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +42,11 @@
 		4A40583E17B41378006B0D8A /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		4A40583F17B41378006B0D8A /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		4A40584217B41378006B0D8A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
+		4A40584917B41877006B0D8A /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		4A40584A17B41877006B0D8A /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		4A40584B17B41877006B0D8A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		4A40584C17B41877006B0D8A /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		4A40584D17B41877006B0D8A /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +54,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A40584E17B41877006B0D8A /* CFNetwork.framework in Frameworks */,
+				4A40584F17B41877006B0D8A /* libc++.dylib in Frameworks */,
+				4A40585017B41877006B0D8A /* QuartzCore.framework in Frameworks */,
+				4A40585117B41877006B0D8A /* Security.framework in Frameworks */,
+				4A40585217B41877006B0D8A /* SystemConfiguration.framework in Frameworks */,
 				4A40582717B41378006B0D8A /* UIKit.framework in Frameworks */,
 				4A40582917B41378006B0D8A /* Foundation.framework in Frameworks */,
 				4A40582B17B41378006B0D8A /* CoreGraphics.framework in Frameworks */,
@@ -73,9 +88,14 @@
 		4A40582517B41378006B0D8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				4A40582617B41378006B0D8A /* UIKit.framework */,
-				4A40582817B41378006B0D8A /* Foundation.framework */,
+				4A40584917B41877006B0D8A /* CFNetwork.framework */,
 				4A40582A17B41378006B0D8A /* CoreGraphics.framework */,
+				4A40582817B41378006B0D8A /* Foundation.framework */,
+				4A40584A17B41877006B0D8A /* libc++.dylib */,
+				4A40584B17B41877006B0D8A /* QuartzCore.framework */,
+				4A40584C17B41877006B0D8A /* Security.framework */,
+				4A40584D17B41877006B0D8A /* SystemConfiguration.framework */,
+				4A40582617B41378006B0D8A /* UIKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
