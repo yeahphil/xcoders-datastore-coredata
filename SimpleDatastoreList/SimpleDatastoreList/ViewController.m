@@ -8,6 +8,8 @@
 
 #import "ViewController.h"
 
+#define kTableName @"tasks"
+
 @interface ViewController ()
 
 @property (nonatomic) DBDatastore *store;
@@ -42,16 +44,18 @@
 {
     DBAccount *account = [DBAccountManager sharedManager].linkedAccount;
     
+    // Set the login button state
     self.linkButtonItem.title = account != nil ? @"Unlink" : @"Link";
     
     if (account != nil) {
+        // Open a data store
         self.store = [DBDatastore openDefaultStoreForAccount:account error:nil];
         
+        // Watch for changes and sync them
         __weak ViewController *weakSelf = self;
         [self.store addObserver:self block:^{
             if (weakSelf.store.status & (DBDatastoreOutgoing | DBDatastoreIncoming)) {
                 NSDictionary *changes = [weakSelf.store sync:nil];
-                
                 NSLog(@"Changes: %@", changes);
                 
                 [weakSelf reload];
@@ -67,7 +71,7 @@
 - (NSArray *)tasks
 {
     if (_tasks == nil && self.store != nil) {
-        DBTable *table = [self.store getTable:@"tasks"];
+        DBTable *table = [self.store getTable:kTableName];
         _tasks = [table query:nil error:nil];
     }
     
@@ -100,6 +104,7 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    // Get the item and delete it
     DBRecord *task = self.tasks[indexPath.row];
     [task deleteRecord];
     [self reload];
@@ -111,7 +116,9 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    DBTable *table = [self.store getTable:@"tasks"];
+    DBTable *table = [self.store getTable:kTableName];
+ 
+    // Insert a new record into the store
     [table insert:@{ @"name": textField.text, @"created": [NSDate date] }];
     
     textField.text = nil;
