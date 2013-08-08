@@ -24,16 +24,10 @@
     // Watch for accounts being linked/unlinked:
     __weak ViewController *weakSelf = self;
     [[DBAccountManager sharedManager] addObserver:self block:^(DBAccount *account) {
-        weakSelf.linkButtonItem.title = account.isLinked ? @"Unlink" : @"Link";
-        
-        if (account.isLinked) {
-            self.store = [DBDatastore openDefaultStoreForAccount:account error:nil];
-        } else {
-            self.store = nil;
-        }
-        
-        [weakSelf reload];
+        [weakSelf setupAccount];
     }];
+    
+    [self setupAccount];
 }
 
 - (void)reload
@@ -41,6 +35,21 @@
     [self.tableView reloadData];
 }
 
+- (void)setupAccount
+{
+    DBAccount *account = [DBAccountManager sharedManager].linkedAccount;
+    
+    self.linkButtonItem.title = account != nil ? @"Unlink" : @"Link";
+    
+    if (account != nil) {
+        self.store = [DBDatastore openDefaultStoreForAccount:account error:nil];
+        
+    } else {
+        self.store = nil;
+    }
+    
+    [self reload];
+}
 #pragma mark - UITableView stuff
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -85,6 +94,8 @@
 {
     if ([DBAccountManager sharedManager].linkedAccount == nil) {
         [[DBAccountManager sharedManager] linkFromController:self];
+    } else {
+        [[DBAccountManager sharedManager].linkedAccount unlink];
     }
 }
 
