@@ -1,0 +1,10 @@
+PODS:
+  - InflectorKit (0.0.1)
+
+DEPENDENCIES:
+  - InflectorKit
+
+SPEC CHECKSUMS:
+  InflectorKit: 9dccab02f95541093995adac639342c9eb9e6c12
+
+COCOAPODS: 0.21.0
